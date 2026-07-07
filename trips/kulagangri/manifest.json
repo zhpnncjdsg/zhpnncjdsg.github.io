@@ -166,5 +166,19 @@
       }
     ]
   },
-  "warnings": []
+  "warnings": [],
+  "publicUrl": "https://zhpnncjdsg.github.io/trips/kulagangri/",
+  "published": {
+    "publicUrl": "https://zhpnncjdsg.github.io/trips/kulagangri/",
+    "publishedAt": "2026-07-07T08:56:56.935Z",
+    "mode": "remote",
+    "provider": "github-pages",
+    "destination": "zhpnncjdsg/zhpnncjdsg.github.io:main:trips/kulagangri/",
+    "remoteProvider": "github-pages",
+    "repository": "zhpnncjdsg/zhpnncjdsg.github.io",
+    "branch": "main",
+    "publicSlug": "kulagangri",
+    "publicPath": "trips/kulagangri/",
+    "publishDir": "/Users/zhp/Documents/nfc网页/.publish/github-pages/zhpnncjdsg.github.io/trips/kulagangri"
+  }
 }
