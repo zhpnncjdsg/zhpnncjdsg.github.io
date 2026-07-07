@@ -1,0 +1,96 @@
+{
+  "version": 1,
+  "generatedAt": "2026-07-07T11:35:03.144Z",
+  "photos": [
+    {
+      "id": "photo-1",
+      "type": "photo",
+      "originalName": "3.jpg",
+      "fileName": "photo-01-0be7c15a.jpg",
+      "sourcePath": "assets/images/photo-01-0be7c15a.jpg",
+      "assetPath": "assets/images/photo-01-0be7c15a.jpg",
+      "mimeType": "image/jpeg",
+      "sizeBytes": 162865,
+      "thumbnailPath": "assets/thumbs/photo-01-0be7c15a-thumb.jpg"
+    },
+    {
+      "id": "photo-2",
+      "type": "photo",
+      "originalName": "4.jpg",
+      "fileName": "photo-02-9c28192a.jpg",
+      "sourcePath": "assets/images/photo-02-9c28192a.jpg",
+      "assetPath": "assets/images/photo-02-9c28192a.jpg",
+      "mimeType": "image/jpeg",
+      "sizeBytes": 195438,
+      "thumbnailPath": "assets/thumbs/photo-02-9c28192a-thumb.jpg"
+    },
+    {
+      "id": "photo-3",
+      "type": "photo",
+      "originalName": "5.jpg",
+      "fileName": "photo-03-21dd13e6.jpg",
+      "sourcePath": "assets/images/photo-03-21dd13e6.jpg",
+      "assetPath": "assets/images/photo-03-21dd13e6.jpg",
+      "mimeType": "image/jpeg",
+      "sizeBytes": 149640,
+      "thumbnailPath": "assets/thumbs/photo-03-21dd13e6-thumb.jpg"
+    },
+    {
+      "id": "photo-4",
+      "type": "photo",
+      "originalName": "6.jpg",
+      "fileName": "photo-04-77f492ea.jpg",
+      "sourcePath": "assets/images/photo-04-77f492ea.jpg",
+      "assetPath": "assets/images/photo-04-77f492ea.jpg",
+      "mimeType": "image/jpeg",
+      "sizeBytes": 226757,
+      "thumbnailPath": "assets/thumbs/photo-04-77f492ea-thumb.jpg"
+    },
+    {
+      "id": "photo-5",
+      "type": "photo",
+      "originalName": "7.jpg",
+      "fileName": "photo-05-1a1ed9f3.jpg",
+      "sourcePath": "assets/images/photo-05-1a1ed9f3.jpg",
+      "assetPath": "assets/images/photo-05-1a1ed9f3.jpg",
+      "mimeType": "image/jpeg",
+      "sizeBytes": 239666,
+      "thumbnailPath": "assets/thumbs/photo-05-1a1ed9f3-thumb.jpg"
+    },
+    {
+      "id": "photo-6",
+      "type": "photo",
+      "originalName": "8.jpg",
+      "fileName": "photo-06-2e294986.jpg",
+      "sourcePath": "assets/images/photo-06-2e294986.jpg",
+      "assetPath": "assets/images/photo-06-2e294986.jpg",
+      "mimeType": "image/jpeg",
+      "sizeBytes": 241752,
+      "thumbnailPath": "assets/thumbs/photo-06-2e294986-thumb.jpg"
+    },
+    {
+      "id": "photo-7",
+      "type": "photo",
+      "originalName": "9.jpg",
+      "fileName": "photo-07-430e7a33.jpg",
+      "sourcePath": "assets/images/photo-07-430e7a33.jpg",
+      "assetPath": "assets/images/photo-07-430e7a33.jpg",
+      "mimeType": "image/jpeg",
+      "sizeBytes": 277557,
+      "thumbnailPath": "assets/thumbs/photo-07-430e7a33-thumb.jpg"
+    }
+  ],
+  "videos": [
+    {
+      "id": "video-1",
+      "type": "video",
+      "originalName": "2021_05_30_19_48_07_864_cycity_C_16_9_ms.mp4",
+      "fileName": "video-01-b5a38b52.mp4",
+      "sourcePath": "assets/videos/video-01-b5a38b52.mp4",
+      "assetPath": "assets/videos/video-01-b5a38b52.mp4",
+      "mimeType": "video/mp4",
+      "sizeBytes": 10245571,
+      "posterPath": "assets/thumbs/video-01-b5a38b52-poster.jpg"
+    }
+  ]
+}

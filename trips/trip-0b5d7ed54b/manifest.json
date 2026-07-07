@@ -1,0 +1,152 @@
+{
+  "version": 1,
+  "slug": "测试",
+  "title": "测试",
+  "location": "测试",
+  "tripDate": "2026-07-06",
+  "generatedAt": "2026-07-07T11:35:03.144Z",
+  "entry": "index.html",
+  "localPreviewPath": "/trips/测试/",
+  "files": {
+    "index": "index.html",
+    "track": "track.json",
+    "media": "media.json",
+    "theme": "theme.json",
+    "manifest": "manifest.json"
+  },
+  "theme": {
+    "id": "coast",
+    "name": "海岸",
+    "scene": "蓝白、浪花、日落"
+  },
+  "stats": {
+    "totalDistanceKm": 101.67,
+    "totalDurationSeconds": 352226,
+    "highestElevationMeters": 901.98,
+    "lowestElevationMeters": -24.4,
+    "elevationGainMeters": 6581.9,
+    "averageSpeedKmh": 1.04,
+    "pointCount": 9881
+  },
+  "media": {
+    "photoCount": 7,
+    "videoCount": 1,
+    "assets": [
+      {
+        "id": "photo-1",
+        "type": "photo",
+        "originalName": "3.jpg",
+        "sourcePath": "source/photos/photo-01-0be7c15a.jpg",
+        "assetPath": "assets/images/photo-01-0be7c15a.jpg",
+        "mimeType": "image/jpeg",
+        "originalSizeBytes": 315882,
+        "outputSizeBytes": 162865,
+        "optimized": true,
+        "optimizer": "sips"
+      },
+      {
+        "id": "photo-2",
+        "type": "photo",
+        "originalName": "4.jpg",
+        "sourcePath": "source/photos/photo-02-9c28192a.jpg",
+        "assetPath": "assets/images/photo-02-9c28192a.jpg",
+        "mimeType": "image/jpeg",
+        "originalSizeBytes": 295406,
+        "outputSizeBytes": 195438,
+        "optimized": true,
+        "optimizer": "sips"
+      },
+      {
+        "id": "photo-3",
+        "type": "photo",
+        "originalName": "5.jpg",
+        "sourcePath": "source/photos/photo-03-21dd13e6.jpg",
+        "assetPath": "assets/images/photo-03-21dd13e6.jpg",
+        "mimeType": "image/jpeg",
+        "originalSizeBytes": 326075,
+        "outputSizeBytes": 149640,
+        "optimized": true,
+        "optimizer": "sips"
+      },
+      {
+        "id": "photo-4",
+        "type": "photo",
+        "originalName": "6.jpg",
+        "sourcePath": "source/photos/photo-04-77f492ea.jpg",
+        "assetPath": "assets/images/photo-04-77f492ea.jpg",
+        "mimeType": "image/jpeg",
+        "originalSizeBytes": 226757,
+        "outputSizeBytes": 226757,
+        "optimized": false,
+        "optimizer": "copy"
+      },
+      {
+        "id": "photo-5",
+        "type": "photo",
+        "originalName": "7.jpg",
+        "sourcePath": "source/photos/photo-05-1a1ed9f3.jpg",
+        "assetPath": "assets/images/photo-05-1a1ed9f3.jpg",
+        "mimeType": "image/jpeg",
+        "originalSizeBytes": 239666,
+        "outputSizeBytes": 239666,
+        "optimized": false,
+        "optimizer": "copy"
+      },
+      {
+        "id": "photo-6",
+        "type": "photo",
+        "originalName": "8.jpg",
+        "sourcePath": "source/photos/photo-06-2e294986.jpg",
+        "assetPath": "assets/images/photo-06-2e294986.jpg",
+        "mimeType": "image/jpeg",
+        "originalSizeBytes": 241752,
+        "outputSizeBytes": 241752,
+        "optimized": false,
+        "optimizer": "copy"
+      },
+      {
+        "id": "photo-7",
+        "type": "photo",
+        "originalName": "9.jpg",
+        "sourcePath": "source/photos/photo-07-430e7a33.jpg",
+        "assetPath": "assets/images/photo-07-430e7a33.jpg",
+        "mimeType": "image/jpeg",
+        "originalSizeBytes": 391961,
+        "outputSizeBytes": 277557,
+        "optimized": true,
+        "optimizer": "sips"
+      },
+      {
+        "id": "video-1",
+        "type": "video",
+        "originalName": "2021_05_30_19_48_07_864_cycity_C_16_9_ms.mp4",
+        "sourcePath": "source/videos/video-01-b5a38b52.mp4",
+        "assetPath": "assets/videos/video-01-b5a38b52.mp4",
+        "mimeType": "video/mp4",
+        "originalSizeBytes": 61528996,
+        "outputSizeBytes": 10245571,
+        "optimized": true,
+        "optimizer": "ffmpeg"
+      }
+    ]
+  },
+  "warnings": [
+    "图片压缩后体积更大，已保留原图：6.jpg",
+    "图片压缩后体积更大，已保留原图：7.jpg",
+    "图片压缩后体积更大，已保留原图：8.jpg"
+  ],
+  "publicUrl": "https://zhpnncjdsg.github.io/trips/trip-0b5d7ed54b/",
+  "published": {
+    "publicUrl": "https://zhpnncjdsg.github.io/trips/trip-0b5d7ed54b/",
+    "publishedAt": "2026-07-07T11:35:44.278Z",
+    "mode": "remote",
+    "provider": "github-pages",
+    "destination": "zhpnncjdsg/zhpnncjdsg.github.io:main:trips/trip-0b5d7ed54b/",
+    "remoteProvider": "github-pages",
+    "repository": "zhpnncjdsg/zhpnncjdsg.github.io",
+    "branch": "main",
+    "publicSlug": "trip-0b5d7ed54b",
+    "publicPath": "trips/trip-0b5d7ed54b/",
+    "publishDir": "/Users/zhp/Documents/nfc网页/.publish/github-pages/zhpnncjdsg.github.io/trips/trip-0b5d7ed54b"
+  }
+}

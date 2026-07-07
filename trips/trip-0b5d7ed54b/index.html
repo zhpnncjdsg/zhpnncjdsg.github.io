@@ -1,0 +1,853 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>测试</title>
+  <script>
+    (function () {
+      var path = window.location.pathname || "";
+      if (path.endsWith("/index.html")) path = path.slice(0, -"index.html".length);
+      if (path && !path.endsWith("/")) path += "/";
+      document.write('<base href="' + path.replace(/"/g, "%22") + '">');
+    })();
+  </script>
+  <link rel="preload" href="track.json" as="fetch" crossorigin="anonymous">
+  <link rel="preload" href="media.json" as="fetch" crossorigin="anonymous">
+  <style>
+    :root {
+      --primary: #0f7890;
+      --secondary: #f1a35c;
+      --bg: #d9eef2;
+      --surface: #f8fcfb;
+      --text: #10282d;
+      --muted: #5f7277;
+      --accent: #1ca7b8;
+      --accent-soft: #ccebef;
+      --bg-gradient: linear-gradient(180deg, #f8fcfb 0%, #d9eef2 45%, #f2c39a 100%);
+      --card-bg: rgba(248,252,251,0.72);
+      --card-border: 1px solid rgba(28,167,184,0.28);
+      --card-shadow: 0 18px 54px rgba(15,120,144,0.17);
+      --card-blur: blur(12px) saturate(1.12);
+      --route-color: #1ca7b8;
+      --route-glow: rgba(28,167,184,0.52);
+      --route-shadow: 0 0 18px rgba(28,167,184,0.42);
+      --route-width: 5;
+      --title-font: "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+      --title-color: #103946;
+      --title-shadow: 0 3px 22px rgba(255,244,231,0.66);
+      --title-weight: 800;
+      --title-letter-spacing: 0;
+      color-scheme: light;
+    }
+    @keyframes coastPulse { from { transform: translate3d(-1.5%, 0, 0); opacity: .62; } to { transform: translate3d(1.5%, 0, 0); opacity: .9; } }
+    * { box-sizing: border-box; }
+    html { background: #111; }
+    body {
+      margin: 0;
+      background: #111;
+      color: var(--text);
+      font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+    }
+    .trip {
+      width: min(100vw, 430px);
+      margin: 0 auto;
+      background: var(--bg-gradient);
+      min-height: 100vh;
+      overflow: hidden;
+      position: relative;
+    }
+    .hero {
+      position: relative;
+      min-height: 100svh;
+      padding: 28px 22px;
+      display: grid;
+      align-content: space-between;
+      isolation: isolate;
+    }
+    .hero::after {
+      content: "";
+      position: absolute;
+      inset: auto 0 0;
+      height: 38%;
+      background: linear-gradient(0deg, var(--surface), transparent);
+      pointer-events: none;
+      z-index: 1;
+    }
+    .theme-decoration {
+      position: absolute;
+      inset: -12%;
+      background: linear-gradient(165deg, rgba(255,255,255,0.34), transparent 32%), repeating-linear-gradient(170deg, rgba(28,167,184,0.1) 0 2px, transparent 2px 24px), linear-gradient(0deg, rgba(241,163,92,0.24), transparent 50%);
+      animation: coastPulse 17s ease-in-out infinite alternate;
+      pointer-events: none;
+      z-index: 0;
+      will-change: transform, opacity;
+    }
+    .hero-media {
+      position: absolute;
+      inset: 0;
+      opacity: 0.24;
+      background-image: url("assets/images/photo-01-0be7c15a.jpg");
+      background-size: cover;
+      background-position: center;
+      filter: saturate(.92) contrast(.96);
+      z-index: 0;
+    }
+    .hero-content, .route-stage { position: relative; z-index: 2; }
+    .kicker { margin: 0 0 10px; color: var(--primary); font-size: 13px; font-weight: 760; letter-spacing: 0; }
+    h1 {
+      margin: 0;
+      color: var(--title-color);
+      font-family: var(--title-font);
+      font-size: 42px;
+      font-weight: var(--title-weight);
+      line-height: 1.05;
+      letter-spacing: var(--title-letter-spacing);
+      text-shadow: var(--title-shadow);
+    }
+    .meta { color: var(--muted); margin-top: 14px; font-size: 15px; }
+    .route-stage {
+      border-radius: 8px;
+      background: var(--card-bg);
+      border: var(--card-border);
+      padding: 16px;
+      box-shadow: var(--card-shadow), 0 0 28px var(--route-glow);
+      -webkit-backdrop-filter: var(--card-blur);
+      backdrop-filter: var(--card-blur);
+    }
+    .route-caption {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      color: var(--muted);
+      font-size: 12px;
+      margin-bottom: 10px;
+    }
+    svg { display: block; width: 100%; height: 240px; }
+    .route-bg {
+      fill: none;
+      stroke: var(--accent-soft);
+      stroke-width: 5;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+    .route-line {
+      fill: none;
+      stroke: var(--route-color);
+      stroke-width: var(--route-width);
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      filter: drop-shadow(var(--route-shadow));
+      opacity: 0;
+      will-change: stroke-dashoffset;
+    }
+    .hero-metrics {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 8px;
+      margin-top: 12px;
+    }
+    .hero-metric {
+      border: var(--card-border);
+      border-radius: 8px;
+      background: var(--card-bg);
+      padding: 10px;
+      -webkit-backdrop-filter: var(--card-blur);
+      backdrop-filter: var(--card-blur);
+    }
+    .hero-metric span { display: block; color: var(--muted); font-size: 11px; margin-bottom: 6px; }
+    .hero-metric strong { display: block; color: var(--primary); font-size: 15px; line-height: 1.15; }
+    .content { padding: 24px 18px 54px; }
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 10px;
+      margin-bottom: 28px;
+    }
+    .stat {
+      border: var(--card-border);
+      border-radius: 8px;
+      padding: 14px;
+      background: var(--card-bg);
+      box-shadow: var(--card-shadow);
+      -webkit-backdrop-filter: var(--card-blur);
+      backdrop-filter: var(--card-blur);
+    }
+    .stat span { display: block; color: var(--muted); font-size: 12px; margin-bottom: 8px; }
+    .stat strong { display: block; color: var(--primary); font-size: 20px; line-height: 1.15; }
+    .media-section { margin-top: 40px; }
+    .story-section-header {
+      display: grid;
+      gap: 8px;
+      margin: 38px 0 20px;
+      padding-top: 16px;
+      border-top: var(--card-border);
+    }
+    .story-section-header .eyebrow {
+      color: var(--accent);
+      font-size: 12px;
+      font-weight: 760;
+      letter-spacing: 0;
+    }
+    h2 { margin: 0; color: var(--primary); font-size: 28px; line-height: 1.08; letter-spacing: 0; }
+    .story-section-header p { margin: 0; color: var(--muted); font-size: 14px; line-height: 1.65; }
+    .photo-story, .video-story {
+      display: grid;
+      gap: 32px;
+    }
+    .mag-cover, .mag-photo {
+      margin: 0;
+      overflow: hidden;
+      position: relative;
+      border-radius: 8px;
+      background: rgba(255,255,255,.48);
+      border: var(--card-border);
+      box-shadow: var(--card-shadow);
+    }
+    .mag-cover {
+      min-height: 460px;
+    }
+    .mag-cover img, .mag-photo img {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+      transform: scale(1.01);
+    }
+    .mag-cover img {
+      aspect-ratio: 3 / 4;
+      min-height: 460px;
+    }
+    .mag-cover::after, .mag-photo::after, .video-frame::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, transparent 38%, rgba(0,0,0,.42));
+      pointer-events: none;
+    }
+    .mag-cover figcaption, .mag-photo figcaption {
+      position: absolute;
+      left: 16px;
+      right: 16px;
+      bottom: 15px;
+      z-index: 1;
+      color: #fff;
+      font-size: 13px;
+      line-height: 1.45;
+      text-shadow: 0 2px 18px rgba(0,0,0,.42);
+    }
+    .mag-cover figcaption span, .mag-photo figcaption span {
+      display: block;
+      margin-bottom: 6px;
+      font-size: 11px;
+      font-weight: 760;
+      letter-spacing: 0;
+      opacity: .84;
+    }
+    .mag-photo {
+      width: calc(100% - 28px);
+      min-height: 320px;
+    }
+    .mag-photo img {
+      aspect-ratio: 4 / 5;
+      min-height: 320px;
+    }
+    .mag-photo.is-offset { margin-left: 28px; }
+    .mag-photo.is-wide {
+      width: 100%;
+      min-height: 250px;
+    }
+    .mag-photo.is-wide img {
+      aspect-ratio: 16 / 11;
+      min-height: 250px;
+    }
+    .gpx-inline-card {
+      margin: -8px 16px 2px;
+      position: relative;
+      border: var(--card-border);
+      border-radius: 8px;
+      background: var(--card-bg);
+      box-shadow: var(--card-shadow);
+      padding: 16px;
+      -webkit-backdrop-filter: var(--card-blur);
+      backdrop-filter: var(--card-blur);
+    }
+    .gpx-inline-card::before {
+      content: "";
+      position: absolute;
+      left: 16px;
+      right: 16px;
+      top: 0;
+      height: 2px;
+      background: linear-gradient(90deg, var(--route-color), transparent);
+    }
+    .gpx-inline-card .label {
+      color: var(--muted);
+      font-size: 12px;
+      margin-bottom: 12px;
+    }
+    .gpx-card-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+    }
+    .gpx-card-grid span {
+      display: block;
+      color: var(--muted);
+      font-size: 11px;
+      margin-bottom: 6px;
+    }
+    .gpx-card-grid strong {
+      display: block;
+      color: var(--primary);
+      font-size: 18px;
+      line-height: 1.15;
+    }
+    .video-card {
+      position: relative;
+      overflow: hidden;
+      border-radius: 8px;
+      border: var(--card-border);
+      background: var(--card-bg);
+      box-shadow: var(--card-shadow), 0 0 26px var(--route-glow);
+      padding: 14px;
+      -webkit-backdrop-filter: var(--card-blur);
+      backdrop-filter: var(--card-blur);
+    }
+    .video-copy {
+      display: grid;
+      gap: 6px;
+      padding: 2px 2px 12px;
+    }
+    .video-copy span {
+      color: var(--accent);
+      font-size: 11px;
+      font-weight: 760;
+      letter-spacing: 0;
+    }
+    .video-copy h3 {
+      margin: 0;
+      color: var(--primary);
+      font-size: 22px;
+      line-height: 1.12;
+      letter-spacing: 0;
+    }
+    .video-copy p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.55;
+    }
+    .video-frame {
+      position: relative;
+      overflow: hidden;
+      border-radius: 8px;
+      aspect-ratio: 16 / 10;
+      background:
+        linear-gradient(135deg, rgba(255,255,255,.24), transparent),
+        linear-gradient(180deg, var(--accent-soft), var(--surface));
+    }
+    .video-frame video {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      background: rgba(0,0,0,.22);
+    }
+    .video-play {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      z-index: 2;
+      width: 62px;
+      height: 62px;
+      border: 1px solid rgba(255,255,255,.62);
+      border-radius: 999px;
+      background: rgba(255,255,255,.22);
+      box-shadow: 0 18px 44px rgba(0,0,0,.22);
+      -webkit-backdrop-filter: blur(14px);
+      backdrop-filter: blur(14px);
+      transform: translate(-50%, -50%);
+      cursor: pointer;
+    }
+    .video-play::before {
+      content: "";
+      position: absolute;
+      left: 25px;
+      top: 20px;
+      border-top: 11px solid transparent;
+      border-bottom: 11px solid transparent;
+      border-left: 16px solid #fff;
+    }
+    .video-card.is-playing .video-play {
+      opacity: 0;
+      pointer-events: none;
+    }
+    .empty { color: var(--muted); background: var(--card-bg); border: var(--card-border); border-radius: 8px; padding: 16px; }
+    @media (prefers-reduced-motion: no-preference) {
+      .reveal {
+        opacity: 0;
+        transform: translate3d(0, 24px, 0);
+        transition: opacity .7s ease, transform .7s ease;
+      }
+      .reveal.in-view {
+        opacity: 1;
+        transform: translate3d(0, 0, 0);
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="trip">
+    <section class="hero">
+      <div class="hero-media" aria-hidden="true"></div>
+      <div class="theme-decoration" aria-hidden="true"></div>
+      <div class="hero-content">
+        <p class="kicker">海岸 · 2026-07-06</p>
+        <h1>测试</h1>
+        <div class="meta">测试 · 101.67 km</div>
+      </div>
+      <div class="route-stage" aria-label="GPX 轨迹动画">
+        <div class="route-caption">
+          <span>GPX 轨迹开场动画</span>
+        </div>
+        <svg viewBox="0 0 320 240" role="img" aria-label="GPX 轨迹动画">
+          <path id="routeBg" class="route-bg" d=""></path>
+          <path id="routePath" class="route-line" d=""></path>
+        </svg>
+        <div class="hero-metrics" aria-label="开场轨迹统计">
+          <div class="hero-metric"><span>总里程</span><strong id="openingDistance">101.67 km</strong></div>
+          <div class="hero-metric"><span>最高海拔</span><strong id="openingElevation">902 m</strong></div>
+          <div class="hero-metric"><span>徒步时间</span><strong id="openingDuration">97 小时 50 分钟</strong></div>
+          <div class="hero-metric"><span>累计爬升</span><strong id="openingGain">6,582 m</strong></div>
+        </div>
+      </div>
+    </section>
+    <section class="content">
+      <div class="stats">
+        <div class="stat"><span>总里程</span><strong>101.67 km</strong></div>
+        <div class="stat"><span>徒步时间</span><strong>97 小时 50 分钟</strong></div>
+        <div class="stat"><span>最高海拔</span><strong>902 m</strong></div>
+        <div class="stat"><span>最低海拔</span><strong>-24 m</strong></div>
+        <div class="stat"><span>累计爬升</span><strong>6,582 m</strong></div>
+        <div class="stat"><span>平均速度</span><strong>1.04 km/h</strong></div>
+      </div>
+      <section class="media-section" aria-labelledby="photo-story-title">
+        <div class="story-section-header reveal">
+          <span class="eyebrow">PHOTO STORY</span>
+          <h2 id="photo-story-title">影像故事</h2>
+          <p>光线、坡度和停留，沿着路线慢慢铺开。</p>
+        </div>
+        <div id="photoStory" class="photo-story"><p class="empty reveal">正在读取 media.json...</p></div>
+      </section>
+      <section class="media-section" aria-labelledby="video-story-title">
+        <div class="story-section-header reveal">
+          <span class="eyebrow">FIELD NOTES</span>
+          <h2 id="video-story-title">现场片段</h2>
+          <p>风声、脚步和短暂停留，被收进这些片段里。</p>
+        </div>
+        <div id="videoStory" class="video-story"><p class="empty reveal">正在读取 media.json...</p></div>
+      </section>
+    </section>
+  </main>
+  <script>
+(function () {
+    var SVG_WIDTH = 320;
+    var SVG_HEIGHT = 240;
+    var PADDING = 22;
+    var MAX_POINTS = 720;
+    var DURATION_MS = 10000;
+    var path = document.getElementById("routePath");
+    var bg = document.getElementById("routeBg");
+    var distanceEl = document.getElementById("openingDistance");
+    var elevationEl = document.getElementById("openingElevation");
+    var durationEl = document.getElementById("openingDuration");
+    var gainEl = document.getElementById("openingGain");
+
+    fetch(dataUrl("track.json"), { cache: "no-store" })
+      .then(function (response) {
+        if (!response.ok) throw new Error("track.json load failed");
+        return response.json();
+      })
+      .then(function (track) {
+        var routePoints = normalizePoints(track.points || []);
+        var routePath = toSvgPath(routePoints);
+        if (routePath) {
+          path.setAttribute("d", routePath);
+          bg.setAttribute("d", routePath);
+        }
+        updateOpeningStats(track.stats || {});
+        animatePath(path);
+      })
+      .catch(function () {
+        var fallbackPath = "M 24 216 C 92 172 144 70 296 24";
+        path.setAttribute("d", fallbackPath);
+        bg.setAttribute("d", fallbackPath);
+        animatePath(path);
+      });
+
+    function dataUrl(file) {
+      var currentPath = window.location.pathname || "";
+      var lastSegment = currentPath.split("/").pop() || "";
+      if (!currentPath.endsWith("/") && lastSegment.indexOf(".") === -1) {
+        return currentPath + "/" + file;
+      }
+      return file;
+    }
+
+    function normalizePoints(points) {
+      var clean = points
+        .map(function (point) {
+          return {
+            lat: Number(point.lat),
+            lng: Number(point.lng != null ? point.lng : point.lon)
+          };
+        })
+        .filter(function (point) {
+          return Number.isFinite(point.lat) && Number.isFinite(point.lng);
+        });
+
+      if (clean.length < 2) return [];
+      var sampled = samplePoints(clean, MAX_POINTS);
+      var minLat = sampled[0].lat;
+      var maxLat = sampled[0].lat;
+      var minLng = sampled[0].lng;
+      var maxLng = sampled[0].lng;
+
+      sampled.forEach(function (point) {
+        minLat = Math.min(minLat, point.lat);
+        maxLat = Math.max(maxLat, point.lat);
+        minLng = Math.min(minLng, point.lng);
+        maxLng = Math.max(maxLng, point.lng);
+      });
+
+      var latSpan = maxLat - minLat || 1;
+      var lngSpan = maxLng - minLng || 1;
+      var scale = Math.min((SVG_WIDTH - PADDING * 2) / lngSpan, (SVG_HEIGHT - PADDING * 2) / latSpan);
+      var routeWidth = lngSpan * scale;
+      var routeHeight = latSpan * scale;
+      var offsetX = (SVG_WIDTH - routeWidth) / 2;
+      var offsetY = (SVG_HEIGHT - routeHeight) / 2;
+
+      return sampled.map(function (point) {
+        return {
+          x: offsetX + (point.lng - minLng) * scale,
+          y: offsetY + (maxLat - point.lat) * scale
+        };
+      });
+    }
+
+    function samplePoints(points, maxPoints) {
+      if (points.length <= maxPoints) return points;
+      var sampled = [];
+      var lastIndex = -1;
+      for (var i = 0; i < maxPoints; i += 1) {
+        var index = Math.round((i * (points.length - 1)) / (maxPoints - 1));
+        if (index !== lastIndex) {
+          sampled.push(points[index]);
+          lastIndex = index;
+        }
+      }
+      return sampled;
+    }
+
+    function toSvgPath(points) {
+      if (points.length < 2) return "";
+      return points
+        .map(function (point, index) {
+          return (index === 0 ? "M " : "L ") + point.x.toFixed(1) + " " + point.y.toFixed(1);
+        })
+        .join(" ");
+    }
+
+    function animatePath(targetPath) {
+      if (!targetPath || !targetPath.getTotalLength) return;
+      var length = targetPath.getTotalLength();
+      targetPath.style.strokeDasharray = String(length);
+      targetPath.style.strokeDashoffset = String(length);
+      targetPath.style.opacity = "1";
+      var startedAt = 0;
+      requestAnimationFrame(function step(timestamp) {
+        if (!startedAt) startedAt = timestamp;
+        var progress = Math.min((timestamp - startedAt) / DURATION_MS, 1);
+        var eased = 1 - Math.pow(1 - progress, 3);
+        targetPath.style.strokeDashoffset = String(length * (1 - eased));
+        if (progress < 1) requestAnimationFrame(step);
+      });
+    }
+
+    function updateOpeningStats(stats) {
+      if (distanceEl) distanceEl.textContent = formatDistance(stats);
+      if (elevationEl) elevationEl.textContent = formatElevation(stats.highestElevationMeters);
+      if (durationEl) durationEl.textContent = formatDuration(stats.totalDurationSeconds || stats.totalTimeSeconds || 0);
+      if (gainEl) gainEl.textContent = formatElevation(stats.elevationGainMeters);
+    }
+
+    function formatDistance(stats) {
+      var km = Number(stats.totalDistanceKm);
+      if (!Number.isFinite(km)) km = Number(stats.totalDistanceMeters || 0) / 1000;
+      return km.toFixed(2) + " km";
+    }
+
+    function formatElevation(value) {
+      var meters = Number(value);
+      return Number.isFinite(meters) ? Math.round(meters).toLocaleString("zh-CN") + " m" : "无数据";
+    }
+
+    function formatDuration(seconds) {
+      var totalMinutes = Math.round(Number(seconds || 0) / 60);
+      var hours = Math.floor(totalMinutes / 60);
+      var minutes = totalMinutes % 60;
+      return hours > 0 ? hours + " 小时 " + minutes + " 分钟" : minutes + " 分钟";
+    }
+  })();
+(function () {
+    var photoStory = document.getElementById("photoStory");
+    var videoStory = document.getElementById("videoStory");
+    var heroMedia = document.querySelector(".hero-media");
+
+    Promise.all([
+      fetch(dataUrl("media.json"), { cache: "no-store" }).then(function (response) {
+        if (!response.ok) throw new Error("media.json load failed");
+        return response.json();
+      }),
+      fetch(dataUrl("track.json"), { cache: "no-store" }).then(function (response) {
+        if (!response.ok) throw new Error("track.json load failed");
+        return response.json();
+      })
+    ])
+      .then(function (results) {
+        var media = results[0] || {};
+        var track = results[1] || {};
+        renderMedia(media, track.stats || {});
+        setupStoryInteractions();
+      })
+      .catch(function () {
+        if (photoStory) photoStory.innerHTML = '<p class="empty reveal in-view">media.json 读取失败，无法展示照片。</p>';
+        if (videoStory) videoStory.innerHTML = '<p class="empty reveal in-view">media.json 读取失败，无法展示视频。</p>';
+      });
+
+    function renderMedia(media, stats) {
+      var photos = Array.isArray(media.photos) ? media.photos : [];
+      var videos = Array.isArray(media.videos) ? media.videos : [];
+
+      if (heroMedia && photos[0]) {
+        heroMedia.style.opacity = "0.32";
+        heroMedia.style.backgroundImage = 'url("' + assetUrl(photos[0].assetPath) + '")';
+      }
+
+      if (photoStory) {
+        photoStory.innerHTML = photos.length > 0
+          ? photos.map(function (photo, index) {
+              return renderPhoto(photo, index) + renderInlineGpxCard(index, stats);
+            }).join("")
+          : '<p class="empty reveal">还没有照片。</p>';
+      }
+
+      if (videoStory) {
+        videoStory.innerHTML = videos.length > 0
+          ? videos.map(function (video, index) {
+              var poster = video.posterPath || (photos[index] && (photos[index].thumbnailPath || photos[index].assetPath)) || (photos[0] && (photos[0].thumbnailPath || photos[0].assetPath)) || "";
+              return renderVideo(video, index, poster);
+            }).join("")
+          : '<p class="empty reveal">还没有视频。</p>';
+      }
+    }
+
+    function renderPhoto(photo, index) {
+      var alt = index === 0 ? "精选封面照片" : "旅途照片 " + String(index + 1).padStart(2, "0");
+      var src = assetUrl(photo.assetPath || photo.sourcePath || "");
+      var className = index === 0 ? "mag-cover" : "mag-photo";
+      if (index > 0 && index % 3 === 1) className += " is-offset";
+      if (index > 0 && index % 3 === 2) className += " is-wide";
+      var label = index === 0 ? "精选封面" : String(index + 1).padStart(2, "0");
+
+      return '<figure class="' + className + ' reveal">' +
+        '<img src="' + src + '" alt="' + alt + '" loading="lazy" decoding="async">' +
+        '<figcaption><span>' + label + '</span></figcaption>' +
+        '</figure>';
+    }
+
+    function renderInlineGpxCard(index, stats) {
+      if (index === 0) {
+        return renderGpxCard("路线切片", [
+          ["总里程", formatDistanceFromStats(stats)],
+          ["最高海拔", formatElevation(stats.highestElevationMeters)]
+        ]);
+      }
+      if (index === 2) {
+        return renderGpxCard("海拔节奏", [
+          ["累计爬升", formatElevation(stats.elevationGainMeters)],
+          ["最低海拔", formatElevation(stats.lowestElevationMeters)]
+        ]);
+      }
+      if (index === 4) {
+        return renderGpxCard("行走速度", [
+          ["徒步时间", formatDuration(stats.totalDurationSeconds || stats.totalTimeSeconds || 0)],
+          ["平均速度", formatSpeed(stats.averageSpeedMetersPerSecond)]
+        ]);
+      }
+      return "";
+    }
+
+    function renderGpxCard(label, items) {
+      return '<aside class="gpx-inline-card reveal">' +
+        '<div class="label">' + escapeText(label) + '</div>' +
+        '<div class="gpx-card-grid">' +
+        items.map(function (item) {
+          return '<div><span>' + escapeText(item[0]) + '</span><strong>' + escapeText(item[1]) + '</strong></div>';
+        }).join("") +
+        '</div>' +
+        '</aside>';
+    }
+
+    function renderVideo(video, index, poster) {
+      var src = assetUrl(video.assetPath || video.sourcePath || "");
+      var posterAttr = poster ? ' poster="' + assetUrl(poster) + '"' : "";
+      var label = escapeText("播放现场片段 " + String(index + 1).padStart(2, "0"));
+
+      return '<article class="video-card reveal">' +
+        '<div class="video-copy">' +
+        '<span>VIDEO ' + String(index + 1).padStart(2, "0") + '</span>' +
+        '<h3>现场片段 ' + String(index + 1).padStart(2, "0") + '</h3>' +
+        '</div>' +
+        '<div class="video-frame">' +
+        '<video data-src="' + src + '"' + posterAttr + ' controls playsinline preload="none"></video>' +
+        '<button class="video-play" type="button" aria-label="' + label + '"></button>' +
+        '</div>' +
+        '</article>';
+    }
+
+    function setupStoryInteractions() {
+      var revealItems = Array.prototype.slice.call(document.querySelectorAll(".reveal"));
+      var videoCards = Array.prototype.slice.call(document.querySelectorAll(".video-card"));
+
+      if ("IntersectionObserver" in window) {
+        var revealObserver = new IntersectionObserver(function (entries) {
+          entries.forEach(function (entry) {
+            if (entry.isIntersecting) {
+              entry.target.classList.add("in-view");
+              revealObserver.unobserve(entry.target);
+            }
+          });
+        }, { threshold: 0.16 });
+
+        revealItems.forEach(function (item) {
+          revealObserver.observe(item);
+        });
+
+        var videoObserver = new IntersectionObserver(function (entries) {
+          entries.forEach(function (entry) {
+            if (entry.isIntersecting) {
+              var video = entry.target.querySelector("video[data-src]");
+              loadVideo(video);
+              videoObserver.unobserve(entry.target);
+            }
+          });
+        }, { rootMargin: "420px 0px" });
+
+        videoCards.forEach(function (card) {
+          videoObserver.observe(card);
+        });
+      } else {
+        revealItems.forEach(function (item) {
+          item.classList.add("in-view");
+        });
+        videoCards.forEach(function (card) {
+          loadVideo(card.querySelector("video[data-src]"));
+        });
+      }
+
+      videoCards.forEach(function (card) {
+        var video = card.querySelector("video");
+        var playButton = card.querySelector(".video-play");
+        if (!video || !playButton) return;
+
+        playButton.addEventListener("click", function () {
+          loadVideo(video);
+          var playResult = video.play();
+          card.classList.add("is-playing");
+          if (playResult && typeof playResult.catch === "function") {
+            playResult.catch(function () {
+              card.classList.remove("is-playing");
+            });
+          }
+        });
+
+        video.addEventListener("play", function () {
+          card.classList.add("is-playing");
+        });
+        video.addEventListener("pause", function () {
+          card.classList.remove("is-playing");
+        });
+        video.addEventListener("ended", function () {
+          card.classList.remove("is-playing");
+        });
+      });
+    }
+
+    function loadVideo(video) {
+      if (!video || !video.dataset || !video.dataset.src) return;
+      video.src = video.dataset.src;
+      video.removeAttribute("data-src");
+      video.load();
+    }
+
+    function dataUrl(file) {
+      var basePath = tripBasePath();
+      return basePath ? basePath + "/" + file : file;
+    }
+
+    function assetUrl(file) {
+      if (!file) return "";
+      var cleanFile = String(file).replace(/^\/+/, "");
+      var basePath = tripBasePath();
+      var encodedFile = encodeURI(cleanFile);
+      return basePath ? basePath + "/" + encodedFile : encodedFile;
+    }
+
+    function tripBasePath() {
+      var currentPath = window.location.pathname || "";
+      var lastSegment = currentPath.split("/").pop() || "";
+      if (!currentPath.endsWith("/") && lastSegment.indexOf(".") === -1) {
+        return currentPath;
+      }
+      return "";
+    }
+
+    function escapeText(value) {
+      return String(value == null ? "" : value)
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#39;");
+    }
+
+    function formatDistanceFromStats(stats) {
+      var km = Number(stats.totalDistanceKm);
+      if (!Number.isFinite(km)) km = Number(stats.totalDistanceMeters || 0) / 1000;
+      return km.toFixed(2) + " km";
+    }
+
+    function formatElevation(value) {
+      var meters = Number(value);
+      return Number.isFinite(meters) ? Math.round(meters).toLocaleString("zh-CN") + " m" : "无数据";
+    }
+
+    function formatDuration(seconds) {
+      var totalMinutes = Math.round(Number(seconds || 0) / 60);
+      var hours = Math.floor(totalMinutes / 60);
+      var minutes = totalMinutes % 60;
+      return hours > 0 ? hours + " 小时 " + minutes + " 分钟" : minutes + " 分钟";
+    }
+
+    function formatSpeed(metersPerSecond) {
+      var speed = Number(metersPerSecond || 0) * 3.6;
+      return speed.toFixed(2) + " km/h";
+    }
+  })();
+  </script>
+</body>
+</html>
