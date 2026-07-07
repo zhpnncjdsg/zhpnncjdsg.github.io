@@ -1,0 +1,170 @@
+{
+  "version": 1,
+  "slug": "库拉岗日",
+  "title": "库拉岗日记忆",
+  "location": "",
+  "tripDate": "2026-07-07",
+  "generatedAt": "2026-07-07T03:37:43.074Z",
+  "entry": "index.html",
+  "localPreviewPath": "/trips/库拉岗日/",
+  "files": {
+    "index": "index.html",
+    "track": "track.json",
+    "media": "media.json",
+    "theme": "theme.json",
+    "manifest": "manifest.json"
+  },
+  "theme": {
+    "id": "snow",
+    "name": "雪山",
+    "scene": "冷冽、通透、冰蓝、玻璃感"
+  },
+  "stats": {
+    "totalDistanceKm": 31.56,
+    "totalDurationSeconds": 94756,
+    "highestElevationMeters": 5247,
+    "lowestElevationMeters": 4498,
+    "elevationGainMeters": 2336,
+    "averageSpeedKmh": 1.2,
+    "pointCount": 12138
+  },
+  "media": {
+    "photoCount": 10,
+    "videoCount": 1,
+    "assets": [
+      {
+        "id": "photo-1",
+        "type": "photo",
+        "originalName": "DSCF5378.JPG",
+        "sourcePath": "source/photos/photo-01-361b2a91.jpg",
+        "assetPath": "assets/images/photo-01-361b2a91.jpg",
+        "mimeType": "image/jpeg",
+        "originalSizeBytes": 9664535,
+        "outputSizeBytes": 518523,
+        "optimized": true,
+        "optimizer": "sips"
+      },
+      {
+        "id": "photo-2",
+        "type": "photo",
+        "originalName": "DSCF5383.JPG",
+        "sourcePath": "source/photos/photo-02-76c41224.jpg",
+        "assetPath": "assets/images/photo-02-76c41224.jpg",
+        "mimeType": "image/jpeg",
+        "originalSizeBytes": 13429590,
+        "outputSizeBytes": 783139,
+        "optimized": true,
+        "optimizer": "sips"
+      },
+      {
+        "id": "photo-3",
+        "type": "photo",
+        "originalName": "DSCF5386.JPG",
+        "sourcePath": "source/photos/photo-03-1352785d.jpg",
+        "assetPath": "assets/images/photo-03-1352785d.jpg",
+        "mimeType": "image/jpeg",
+        "originalSizeBytes": 13005317,
+        "outputSizeBytes": 867854,
+        "optimized": true,
+        "optimizer": "sips"
+      },
+      {
+        "id": "photo-4",
+        "type": "photo",
+        "originalName": "DSCF5387.JPG",
+        "sourcePath": "source/photos/photo-04-307de1f2.jpg",
+        "assetPath": "assets/images/photo-04-307de1f2.jpg",
+        "mimeType": "image/jpeg",
+        "originalSizeBytes": 12952206,
+        "outputSizeBytes": 715741,
+        "optimized": true,
+        "optimizer": "sips"
+      },
+      {
+        "id": "photo-5",
+        "type": "photo",
+        "originalName": "DSCF5388.JPG",
+        "sourcePath": "source/photos/photo-05-496c99b5.jpg",
+        "assetPath": "assets/images/photo-05-496c99b5.jpg",
+        "mimeType": "image/jpeg",
+        "originalSizeBytes": 12838925,
+        "outputSizeBytes": 687303,
+        "optimized": true,
+        "optimizer": "sips"
+      },
+      {
+        "id": "photo-6",
+        "type": "photo",
+        "originalName": "DSCF5389.JPG",
+        "sourcePath": "source/photos/photo-06-1f1d079f.jpg",
+        "assetPath": "assets/images/photo-06-1f1d079f.jpg",
+        "mimeType": "image/jpeg",
+        "originalSizeBytes": 11870427,
+        "outputSizeBytes": 624528,
+        "optimized": true,
+        "optimizer": "sips"
+      },
+      {
+        "id": "photo-7",
+        "type": "photo",
+        "originalName": "DSCF5391.JPG",
+        "sourcePath": "source/photos/photo-07-f46f85fd.jpg",
+        "assetPath": "assets/images/photo-07-f46f85fd.jpg",
+        "mimeType": "image/jpeg",
+        "originalSizeBytes": 13321535,
+        "outputSizeBytes": 805192,
+        "optimized": true,
+        "optimizer": "sips"
+      },
+      {
+        "id": "photo-8",
+        "type": "photo",
+        "originalName": "DSCF5392.JPG",
+        "sourcePath": "source/photos/photo-08-4159921b.jpg",
+        "assetPath": "assets/images/photo-08-4159921b.jpg",
+        "mimeType": "image/jpeg",
+        "originalSizeBytes": 13226557,
+        "outputSizeBytes": 890045,
+        "optimized": true,
+        "optimizer": "sips"
+      },
+      {
+        "id": "photo-9",
+        "type": "photo",
+        "originalName": "DSCF5393.JPG",
+        "sourcePath": "source/photos/photo-09-739ca325.jpg",
+        "assetPath": "assets/images/photo-09-739ca325.jpg",
+        "mimeType": "image/jpeg",
+        "originalSizeBytes": 13210475,
+        "outputSizeBytes": 935398,
+        "optimized": true,
+        "optimizer": "sips"
+      },
+      {
+        "id": "photo-10",
+        "type": "photo",
+        "originalName": "DSCF5395.JPG",
+        "sourcePath": "source/photos/photo-10-ddd12e97.jpg",
+        "assetPath": "assets/images/photo-10-ddd12e97.jpg",
+        "mimeType": "image/jpeg",
+        "originalSizeBytes": 12347471,
+        "outputSizeBytes": 654530,
+        "optimized": true,
+        "optimizer": "sips"
+      },
+      {
+        "id": "video-1",
+        "type": "video",
+        "originalName": "2021_05_30_19_48_07_864_cycity_C_16_9_ms.mp4",
+        "sourcePath": "source/videos/video-01-6813f8e3.mp4",
+        "assetPath": "assets/videos/video-01-6813f8e3.mp4",
+        "mimeType": "video/mp4",
+        "originalSizeBytes": 61528996,
+        "outputSizeBytes": 10245571,
+        "optimized": true,
+        "optimizer": "ffmpeg"
+      }
+    ]
+  },
+  "warnings": []
+}
