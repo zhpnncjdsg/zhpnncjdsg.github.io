@@ -1,0 +1,274 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>库拉岗日</title>
+    <script>
+      (function () {
+        var path = window.location.pathname || "";
+        if (path.endsWith("/index.html")) path = path.slice(0, -"index.html".length);
+        if (path && !path.endsWith("/")) path += "/";
+        document.write('<base href="' + path.replace(/"/g, "%22") + '">');
+      })();
+    </script>
+    <style>
+      :root {
+        --primary: #155e75;
+        --accent: #0ea5c6;
+        --bg: linear-gradient(180deg, #f8fcfd 0%, #dceff5 46%, #b9dce8 100%);
+        --surface: rgba(255,255,255,.72);
+        --line: rgba(130,190,206,.42);
+        --text: #102630;
+        --muted: #5f7480;
+        --decoration: rgba(104,184,206,.18);
+      }
+      * { box-sizing: border-box; }
+      html { background: #13221f; }
+      body { margin: 0; background: #13221f; color: var(--text); font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif; }
+      .trip { width: min(100vw, 430px); min-height: 100vh; margin: 0 auto; overflow: hidden; background: var(--bg); }
+      .hero { position: relative; min-height: 100svh; padding: 28px 20px; display: grid; align-content: space-between; isolation: isolate; }
+      .hero::before { content: ""; position: absolute; inset: -18%; z-index: -2; background: radial-gradient(circle at 78% 18%, var(--decoration), transparent 31%), repeating-linear-gradient(135deg, rgba(255,255,255,.18) 0 1px, transparent 1px 20px); animation: drift 16s ease-in-out infinite alternate; }
+      .hero::after { content: ""; position: absolute; inset: auto 0 0; height: 40%; z-index: -1; background: linear-gradient(0deg, rgba(255,255,255,.26), transparent); }
+      @keyframes drift { from { transform: translate3d(-2%, -1%, 0); } to { transform: translate3d(2%, 1%, 0); } }
+      .hero-media { position: absolute; inset: 0; z-index: -3; background: linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.3)), url("assets/photos/202607101600432390800-003adbdd4a.webp") center / cover; opacity: .32; filter: saturate(.9) contrast(.96); }
+      .kicker { margin: 0 0 10px; color: var(--primary); font-size: 12px; font-weight: 780; letter-spacing: 0; }
+      h1 { margin: 0; max-width: 9em; color: var(--text); font-size: 42px; font-weight: 800; line-height: 1.06; letter-spacing: 0; text-wrap: balance; }
+      .meta { margin: 14px 0 0; color: var(--muted); font-size: 15px; line-height: 1.5; }
+      .route-stage, .stat, .story-card, .video-card { border: 1px solid var(--line); border-radius: 8px; background: var(--surface); box-shadow: 0 18px 48px rgba(21,55,50,.13); backdrop-filter: blur(12px) saturate(1.08); }
+      .route-stage { padding: 14px; }
+      .route-caption { display: flex; justify-content: space-between; gap: 12px; margin-bottom: 10px; color: var(--muted); font-size: 12px; }
+      svg { display: block; width: 100%; height: 230px; }
+      .route-back { fill: none; stroke: color-mix(in srgb, var(--accent), white 70%); stroke-width: 5; stroke-linecap: round; stroke-linejoin: round; }
+      .route-line { fill: none; stroke: var(--accent); stroke-width: 5; stroke-linecap: round; stroke-linejoin: round; filter: drop-shadow(0 0 9px color-mix(in srgb, var(--accent), transparent 42%)); }
+      .metrics, .stats { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 9px; }
+      .metrics { margin-top: 12px; }
+      .metric, .stat { padding: 11px; }
+      .metric span, .stat span { display: block; color: var(--muted); font-size: 11px; margin-bottom: 6px; }
+      .metric strong { display: block; color: var(--primary); font-size: 15px; line-height: 1.15; }
+      .content { padding: 26px 18px 54px; }
+      .stat strong { display: block; color: var(--primary); font-size: 19px; line-height: 1.15; }
+      .section-head { display: grid; gap: 8px; margin: 42px 0 18px; padding-top: 16px; border-top: 1px solid var(--line); }
+      .section-head span { color: var(--accent); font-size: 12px; font-weight: 780; letter-spacing: 0; }
+      h2 { margin: 0; color: var(--primary); font-size: 28px; line-height: 1.1; letter-spacing: 0; }
+      .photo-story, .video-story { display: grid; gap: 28px; }
+      .photo { margin: 0; overflow: hidden; border: 1px solid var(--line); border-radius: 8px; background: var(--surface); box-shadow: 0 16px 44px rgba(21,55,50,.14); }
+      .photo img { display: block; width: 100%; min-height: 300px; object-fit: cover; }
+      .photo.feature img { aspect-ratio: 3 / 4; min-height: 440px; }
+      .photo.offset { width: calc(100% - 26px); margin-left: 26px; }
+      .photo.wide img { aspect-ratio: 16 / 10; min-height: 230px; }
+      .story-card { padding: 16px; }
+      .story-card .label { color: var(--muted); font-size: 12px; margin-bottom: 13px; }
+      .story-card .pairs { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+      .story-card span { display: block; color: var(--muted); font-size: 11px; margin-bottom: 6px; }
+      .story-card strong { display: block; color: var(--primary); font-size: 18px; line-height: 1.15; }
+      .quote { margin: -6px 16px 2px; color: var(--primary); font-size: 20px; font-weight: 650; line-height: 1.58; text-wrap: balance; }
+      .quote::before { content: ""; display: block; width: 34px; height: 2px; margin-bottom: 12px; background: linear-gradient(90deg, var(--accent), transparent); }
+      .video-card { padding: 13px; }
+      .video-card h3 { margin: 0 0 12px; color: var(--primary); font-size: 21px; letter-spacing: 0; }
+      video { display: block; width: 100%; aspect-ratio: 16 / 10; border-radius: 6px; object-fit: cover; background: #152423; }
+      .empty { margin: 0; padding: 16px; border: 1px solid var(--line); border-radius: 8px; background: var(--surface); color: var(--muted); }
+      @media (prefers-reduced-motion: reduce) { .hero::before { animation: none; } }
+    </style>
+  </head>
+  <body>
+    <main class="trip">
+      <section class="hero">
+        <div class="hero-media" aria-hidden="true"></div>
+        <div>
+          <p class="kicker">雪山 · 2026-07-09</p>
+          <h1>库拉岗日</h1>
+          <p class="meta">西藏 · 101.67 km</p>
+        </div>
+        <div class="route-stage" aria-label="GPX 轨迹">
+          <div class="route-caption"><span>徒步轨迹</span><span>9881 个轨迹点</span></div>
+          <svg viewBox="0 0 320 230" role="img" aria-label="GPX 轨迹动画">
+            <path id="route-back" class="route-back" d=""></path>
+            <path id="route-line" class="route-line" d=""></path>
+          </svg>
+          <div class="metrics">
+            <div class="metric"><span>总里程</span><strong>101.67 km</strong></div>
+            <div class="metric"><span>最高海拔</span><strong>902 m</strong></div>
+            <div class="metric"><span>徒步时间</span><strong>97 小时 50 分</strong></div>
+            <div class="metric"><span>累计爬升</span><strong>6582 m</strong></div>
+          </div>
+        </div>
+      </section>
+
+      <section class="content">
+        <div class="stats" aria-label="轨迹统计">
+          <div class="stat"><span>总里程</span><strong>101.67 km</strong></div>
+          <div class="stat"><span>徒步时间</span><strong>97 小时 50 分</strong></div>
+          <div class="stat"><span>最高海拔</span><strong>902 m</strong></div>
+          <div class="stat"><span>最低海拔</span><strong>-24 m</strong></div>
+          <div class="stat"><span>累计爬升</span><strong>6582 m</strong></div>
+          <div class="stat"><span>累计下降</span><strong>6545 m</strong></div>
+        </div>
+
+        <section>
+          <div class="section-head"><span>PHOTO STORY</span><h2>影像故事</h2></div>
+          <div class="photo-story">
+            
+              <figure class="photo feature">
+                <img src="assets/photos/202607101600432390800-003adbdd4a.webp" alt="紫檀－4.jpg" loading="lazy" decoding="async">
+              </figure>
+              
+                <aside class="story-card"><div class="label">路线切片</div><div class="pairs"><div><span>总里程</span><strong>101.67 km</strong></div><div><span>最高海拔</span><strong>902 m</strong></div></div></aside>
+              
+            
+              <figure class="photo offset">
+                <img src="assets/photos/202607101600432460800-9e9c7c335d.webp" alt="紫檀－10.jpg" loading="lazy" decoding="async">
+              </figure>
+              
+                <p class="quote">把每一步的风、云和山脊，留在这段路里。</p>
+              
+            
+              <figure class="photo wide">
+                <img src="assets/photos/202607101600432520800-b02bd50d32.webp" alt="紫檀－13.jpg" loading="lazy" decoding="async">
+              </figure>
+              
+                <aside class="story-card"><div class="label">海拔节奏</div><div class="pairs"><div><span>累计爬升</span><strong>6582 m</strong></div><div><span>最低海拔</span><strong>-24 m</strong></div></div></aside>
+              
+            
+              <figure class="photo ">
+                <img src="assets/photos/202607101600432560800-2afb4131bb.webp" alt="紫檀－16.jpg" loading="lazy" decoding="async">
+              </figure>
+              
+            
+              <figure class="photo offset">
+                <img src="assets/photos/202607101600432660800-df699e3788.webp" alt="紫檀－26.jpg" loading="lazy" decoding="async">
+              </figure>
+              
+            
+              <figure class="photo wide">
+                <img src="assets/photos/202607101600432700800-50eaf9cb2b.webp" alt="紫檀－28.jpg" loading="lazy" decoding="async">
+              </figure>
+              
+            
+              <figure class="photo ">
+                <img src="assets/photos/202607101601116530800-62c29814ee.webp" alt="3.jpg" loading="lazy" decoding="async">
+              </figure>
+              
+            
+              <figure class="photo offset">
+                <img src="assets/photos/202607101601116580800-a3b97a45ca.webp" alt="4.jpg" loading="lazy" decoding="async">
+              </figure>
+              
+            
+              <figure class="photo wide">
+                <img src="assets/photos/202607101601116600800-10e1e407fb.webp" alt="5.jpg" loading="lazy" decoding="async">
+              </figure>
+              
+            
+              <figure class="photo ">
+                <img src="assets/photos/202607101601116620800-85c181175f.webp" alt="6.jpg" loading="lazy" decoding="async">
+              </figure>
+              
+            
+              <figure class="photo offset">
+                <img src="assets/photos/202607101601116630800-67611d7c1d.webp" alt="7.jpg" loading="lazy" decoding="async">
+              </figure>
+              
+            
+              <figure class="photo wide">
+                <img src="assets/photos/202607101601116670800-4796354abb.webp" alt="8.jpg" loading="lazy" decoding="async">
+              </figure>
+              
+            
+              <figure class="photo ">
+                <img src="assets/photos/202607101601116680800-177dd8c5bc.webp" alt="9.jpg" loading="lazy" decoding="async">
+              </figure>
+              
+            
+              <figure class="photo offset">
+                <img src="assets/photos/202607101601116710800-13432feec2.webp" alt="10.jpg" loading="lazy" decoding="async">
+              </figure>
+              
+            
+              <figure class="photo wide">
+                <img src="assets/photos/202607101601116740800-07fd708709.webp" alt="11.jpg" loading="lazy" decoding="async">
+              </figure>
+              
+            
+              <figure class="photo ">
+                <img src="assets/photos/202607101601116790800-3138350572.webp" alt="12.jpg" loading="lazy" decoding="async">
+              </figure>
+              
+            
+              <figure class="photo offset">
+                <img src="assets/photos/202607101601116820800-616777c611.webp" alt="13.jpg" loading="lazy" decoding="async">
+              </figure>
+              
+            
+              <figure class="photo wide">
+                <img src="assets/photos/202607101601116840800-63234e9d04.webp" alt="14.jpg" loading="lazy" decoding="async">
+              </figure>
+              
+            
+              <figure class="photo ">
+                <img src="assets/photos/202607101601116870800-23d288afd2.webp" alt="15.jpg" loading="lazy" decoding="async">
+              </figure>
+              
+            
+              <figure class="photo offset">
+                <img src="assets/photos/202607101601116900800-d8cf8f6486.webp" alt="16.jpg" loading="lazy" decoding="async">
+              </figure>
+              
+            
+              <figure class="photo wide">
+                <img src="assets/photos/202607101601116920800-d7acc1fe99.webp" alt="17.jpg" loading="lazy" decoding="async">
+              </figure>
+              
+            
+              <figure class="photo ">
+                <img src="assets/photos/202607101601116940800-60d4436f4d.webp" alt="18.jpg" loading="lazy" decoding="async">
+              </figure>
+              
+            
+              <figure class="photo offset">
+                <img src="assets/photos/202607101601116970800-a6f7ff28db.webp" alt="19.jpg" loading="lazy" decoding="async">
+              </figure>
+              
+            
+          </div>
+        </section>
+
+        <section>
+          <div class="section-head"><span>FIELD NOTES</span><h2>现场片段</h2></div>
+          <div class="video-story">
+            
+              <article class="video-card"><h3>现场片段</h3><video controls playsinline preload="metadata" poster="assets/photos/202607101600432390800-003adbdd4a.webp"><source src="assets/videos/202607101601334470800-76321827f0.mp4" type="video/mp4"></video></article>
+            
+              <article class="video-card"><h3>现场片段</h3><video controls playsinline preload="metadata" poster="assets/photos/202607101600432460800-9e9c7c335d.webp"><source src="assets/videos/202607101601427560800-afb3b6fbaf.mp4" type="video/mp4"></video></article>
+            
+          </div>
+        </section>
+      </section>
+    </main>
+    <script>
+      (function () {
+        var path = document.getElementById("route-line");
+        var back = document.getElementById("route-back");
+        fetch("assets/track.json", { cache: "no-store" })
+          .then(function (response) { return response.ok ? response.json() : Promise.reject(); })
+          .then(function (track) {
+            var points = Array.isArray(track.points) ? track.points : [];
+            var d = toPath(points);
+            if (!d) d = "M 24 206 C 94 166 146 68 296 24";
+            path.setAttribute("d", d); back.setAttribute("d", d);
+            var length = path.getTotalLength(); path.style.strokeDasharray = length; path.style.strokeDashoffset = length;
+            requestAnimationFrame(function () { path.style.transition = "stroke-dashoffset 6s ease-out"; path.style.strokeDashoffset = "0"; });
+          })
+          .catch(function () { var d = "M 24 206 C 94 166 146 68 296 24"; path.setAttribute("d", d); back.setAttribute("d", d); });
+        function toPath(points) {
+          if (points.length < 2) return "";
+          var sampled = points.length > 720 ? points.filter(function (_, i) { return i % Math.ceil(points.length / 720) === 0; }) : points;
+          var lats = sampled.map(function (p) { return Number(p.lat); }); var lngs = sampled.map(function (p) { return Number(p.lng); });
+          var minLat = Math.min.apply(null, lats), maxLat = Math.max.apply(null, lats), minLng = Math.min.apply(null, lngs), maxLng = Math.max.apply(null, lngs);
+          var latSpan = Math.max(maxLat - minLat, 0.000001), lngSpan = Math.max(maxLng - minLng, 0.000001);
+          return sampled.map(function (p, i) { var x = 22 + ((Number(p.lng) - minLng) / lngSpan) * 276; var y = 208 - ((Number(p.lat) - minLat) / latSpan) * 186; return (i ? "L " : "M ") + x.toFixed(1) + " " + y.toFixed(1); }).join(" ");
+        }
+      })();
+    </script>
+  </body>
+</html>

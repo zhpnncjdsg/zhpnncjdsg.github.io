@@ -1,0 +1,19 @@
+{
+  "order_id": "20260710-trail-001",
+  "generated_at": "2026-07-10T22:39:38.008+08:00",
+  "theme_id": "snow",
+  "source_fingerprint": "c15f3b32c594905074b85d7387cf01c8f7dec4a2d6505b601a396f3f97abfd4c",
+  "output_path": "output/web/index.html",
+  "assets": {
+    "track": "assets/track.json",
+    "media": "media.json",
+    "theme": "theme.json"
+  },
+  "public_url": "https://zhpnncjdsg.github.io/trips/20260710-trail-001/",
+  "published": {
+    "public_url": "https://zhpnncjdsg.github.io/trips/20260710-trail-001/",
+    "published_at": "2026-07-10T22:42:40.235+08:00",
+    "provider": "github-pages",
+    "destination": "zhpnncjdsg/zhpnncjdsg.github.io:main:trips/20260710-trail-001/"
+  }
+}

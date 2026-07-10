@@ -1,0 +1,13 @@
+{
+  "id": "snow",
+  "name": "雪山",
+  "scene": "冷冽、通透、冰蓝",
+  "primary": "#155e75",
+  "accent": "#0ea5c6",
+  "background": "linear-gradient(180deg, #f8fcfd 0%, #dceff5 46%, #b9dce8 100%)",
+  "surface": "rgba(255,255,255,.72)",
+  "line": "rgba(130,190,206,.42)",
+  "text": "#102630",
+  "muted": "#5f7480",
+  "decoration": "rgba(104,184,206,.18)"
+}

@@ -1,0 +1,156 @@
+{
+  "photos": [
+    {
+      "name": "紫檀－4.jpg",
+      "asset_path": "assets/photos/202607101600432390800-003adbdd4a.webp",
+      "mime_type": "image/webp",
+      "size_bytes": 38316
+    },
+    {
+      "name": "紫檀－10.jpg",
+      "asset_path": "assets/photos/202607101600432460800-9e9c7c335d.webp",
+      "mime_type": "image/webp",
+      "size_bytes": 37806
+    },
+    {
+      "name": "紫檀－13.jpg",
+      "asset_path": "assets/photos/202607101600432520800-b02bd50d32.webp",
+      "mime_type": "image/webp",
+      "size_bytes": 60342
+    },
+    {
+      "name": "紫檀－16.jpg",
+      "asset_path": "assets/photos/202607101600432560800-2afb4131bb.webp",
+      "mime_type": "image/webp",
+      "size_bytes": 102528
+    },
+    {
+      "name": "紫檀－26.jpg",
+      "asset_path": "assets/photos/202607101600432660800-df699e3788.webp",
+      "mime_type": "image/webp",
+      "size_bytes": 57620
+    },
+    {
+      "name": "紫檀－28.jpg",
+      "asset_path": "assets/photos/202607101600432700800-50eaf9cb2b.webp",
+      "mime_type": "image/webp",
+      "size_bytes": 332410
+    },
+    {
+      "name": "3.jpg",
+      "asset_path": "assets/photos/202607101601116530800-62c29814ee.webp",
+      "mime_type": "image/webp",
+      "size_bytes": 232854
+    },
+    {
+      "name": "4.jpg",
+      "asset_path": "assets/photos/202607101601116580800-a3b97a45ca.webp",
+      "mime_type": "image/webp",
+      "size_bytes": 165252
+    },
+    {
+      "name": "5.jpg",
+      "asset_path": "assets/photos/202607101601116600800-10e1e407fb.webp",
+      "mime_type": "image/webp",
+      "size_bytes": 198722
+    },
+    {
+      "name": "6.jpg",
+      "asset_path": "assets/photos/202607101601116620800-85c181175f.webp",
+      "mime_type": "image/webp",
+      "size_bytes": 153114
+    },
+    {
+      "name": "7.jpg",
+      "asset_path": "assets/photos/202607101601116630800-67611d7c1d.webp",
+      "mime_type": "image/webp",
+      "size_bytes": 193332
+    },
+    {
+      "name": "8.jpg",
+      "asset_path": "assets/photos/202607101601116670800-4796354abb.webp",
+      "mime_type": "image/webp",
+      "size_bytes": 176334
+    },
+    {
+      "name": "9.jpg",
+      "asset_path": "assets/photos/202607101601116680800-177dd8c5bc.webp",
+      "mime_type": "image/webp",
+      "size_bytes": 127356
+    },
+    {
+      "name": "10.jpg",
+      "asset_path": "assets/photos/202607101601116710800-13432feec2.webp",
+      "mime_type": "image/webp",
+      "size_bytes": 153652
+    },
+    {
+      "name": "11.jpg",
+      "asset_path": "assets/photos/202607101601116740800-07fd708709.webp",
+      "mime_type": "image/webp",
+      "size_bytes": 118600
+    },
+    {
+      "name": "12.jpg",
+      "asset_path": "assets/photos/202607101601116790800-3138350572.webp",
+      "mime_type": "image/webp",
+      "size_bytes": 122132
+    },
+    {
+      "name": "13.jpg",
+      "asset_path": "assets/photos/202607101601116820800-616777c611.webp",
+      "mime_type": "image/webp",
+      "size_bytes": 193918
+    },
+    {
+      "name": "14.jpg",
+      "asset_path": "assets/photos/202607101601116840800-63234e9d04.webp",
+      "mime_type": "image/webp",
+      "size_bytes": 275062
+    },
+    {
+      "name": "15.jpg",
+      "asset_path": "assets/photos/202607101601116870800-23d288afd2.webp",
+      "mime_type": "image/webp",
+      "size_bytes": 112976
+    },
+    {
+      "name": "16.jpg",
+      "asset_path": "assets/photos/202607101601116900800-d8cf8f6486.webp",
+      "mime_type": "image/webp",
+      "size_bytes": 154288
+    },
+    {
+      "name": "17.jpg",
+      "asset_path": "assets/photos/202607101601116920800-d7acc1fe99.webp",
+      "mime_type": "image/webp",
+      "size_bytes": 170320
+    },
+    {
+      "name": "18.jpg",
+      "asset_path": "assets/photos/202607101601116940800-60d4436f4d.webp",
+      "mime_type": "image/webp",
+      "size_bytes": 160124
+    },
+    {
+      "name": "19.jpg",
+      "asset_path": "assets/photos/202607101601116970800-a6f7ff28db.webp",
+      "mime_type": "image/webp",
+      "size_bytes": 154400
+    }
+  ],
+  "videos": [
+    {
+      "name": "888D15F4-BEA7-440E-927C-F202B4E60732.MOV",
+      "asset_path": "assets/videos/202607101601334470800-76321827f0.mp4",
+      "mime_type": "video/mp4",
+      "size_bytes": 1372351
+    },
+    {
+      "name": "2021_05_30_19_48_07_864_cycity_C_16_9_ms.mp4",
+      "asset_path": "assets/videos/202607101601427560800-afb3b6fbaf.mp4",
+      "mime_type": "video/mp4",
+      "size_bytes": 5535241
+    }
+  ]
+}
